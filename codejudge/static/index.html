@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>编程能力测试</title>
+<link rel="stylesheet" href="/static/style.css?v=3">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+<div id="app">
+
+  <!-- 登录/注册 -->
+  <div id="auth-view" class="auth-wrap hidden">
+    <div class="auth-card">
+      <div class="auth-tabs">
+        <button id="tab-login" class="tab active" onclick="switchAuth('login')">登录</button>
+        <button id="tab-register" class="tab" onclick="switchAuth('register')">注册</button>
+      </div>
+      <h1 id="auth-title">欢迎回来</h1>
+      <p class="sub" id="auth-sub">登录后继续你的挑战</p>
+      <form id="auth-form" onsubmit="submitAuth(event)">
+        <input id="auth-username" type="text" placeholder="用户名" autocomplete="username" required minlength="3">
+        <input id="auth-password" type="password" placeholder="密码" autocomplete="current-password" required minlength="6">
+        <input id="auth-confirm" type="password" placeholder="确认密码" autocomplete="new-password" hidden>
+        <p id="auth-msg" class="auth-msg"></p>
+        <button type="submit" class="btn primary" id="auth-submit" style="width:100%;justify-content:center;">登 录</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- 主界面 -->
+  <div id="main-view" class="hidden">
+    <header class="topbar">
+      <span class="brand">Code<span>Test</span></span>
+      <span class="spacer"></span>
+      <span class="user-name" id="user-name"></span>
+      <button class="btn ghost small" onclick="logout()">退出</button>
+    </header>
+
+    <!-- 语言选择 -->
+    <section id="home-view">
+      <h2 class="section-title">选择语言</h2>
+      <p class="section-desc">Python · C · Java · Rust · C++ · 每语言从入门到精通</p>
+      <div class="lang-grid">
+        <div class="lang-card" onclick="enterLang('python')">
+          <div class="lang-head"><span class="lang-badge py">Py</span><h3>Python</h3></div>
+          <div class="lang-count" id="stat-python">0 / 25</div>
+          <div class="bar"><div class="bar-fill py" id="bar-python"></div></div>
+        </div>
+        <div class="lang-card" onclick="enterLang('c')">
+          <div class="lang-head"><span class="lang-badge c">C</span><h3>C</h3></div>
+          <div class="lang-count" id="stat-c">0 / 25</div>
+          <div class="bar"><div class="bar-fill c" id="bar-c"></div></div>
+        </div>
+        <div class="lang-card" onclick="enterLang('java')">
+          <div class="lang-head"><span class="lang-badge java">Ja</span><h3>Java</h3></div>
+          <div class="lang-count" id="stat-java">0 / 25</div>
+          <div class="bar"><div class="bar-fill java" id="bar-java"></div></div>
+        </div>
+        <div class="lang-card" onclick="enterLang('rust')">
+          <div class="lang-head"><span class="lang-badge rust">Rs</span><h3>Rust</h3></div>
+          <div class="lang-count" id="stat-rust">0 / 25</div>
+          <div class="bar"><div class="bar-fill rust" id="bar-rust"></div></div>
+        </div>
+        <div class="lang-card" onclick="enterLang('cpp')">
+          <div class="lang-head"><span class="lang-badge cpp">C++</span><h3>C++</h3></div>
+          <div class="lang-count" id="stat-cpp">0 / 25</div>
+          <div class="bar"><div class="bar-fill cpp" id="bar-cpp"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 答题 -->
+    <section id="quiz-view" class="hidden">
+      <div class="quiz-head">
+        <button class="btn ghost small" onclick="backHome()">返回</button>
+        <h2 id="quiz-lang-title"></h2>
+        <div class="level-tabs" id="level-tabs"></div>
+      </div>
+      <div class="quiz-body">
+        <div class="q-list" id="q-list"></div>
+        <div class="q-main">
+          <div class="q-title" id="q-title"></div>
+          <div class="q-meta" id="q-meta"></div>
+          <div class="q-desc" id="q-desc"></div>
+          <div class="editor-wrap">
+            <div class="editor-bar">
+              <span id="editor-lang-name">main.py</span>
+              <button class="btn primary small" id="judge-btn" onclick="submitCode()">提交评测</button>
+            </div>
+            <div class="editor-container">
+              <div class="editor-lines" id="editor-lines">1</div>
+              <textarea id="editor" spellcheck="false" placeholder="编写代码..."></textarea>
+            </div>
+          </div>
+          <div id="result" class="result hidden"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>
